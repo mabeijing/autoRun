@@ -2,7 +2,7 @@ import logging
 from descriptor import (OilAttr, ReceiptAttr, CommonAttr, DesignateAttr)
 from cargoType import CargoType
 from casesuit import CaseSuit
-from DBUtils import rds
+from dbUtils import rds
 from component import Oil, Receipt, Common, Designate
 
 logger = logging.getLogger(__name__)

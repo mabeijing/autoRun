@@ -1,5 +1,5 @@
 import json
-from DBUtils import rds
+from dbUtils import rds
 
 
 class OilAttr:
