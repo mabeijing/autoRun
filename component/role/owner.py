@@ -1,5 +1,5 @@
 from goRequest import Request
-from DBUtils import rds
+from dbUtils import rds
 import requests
 from requests import utils
 import config

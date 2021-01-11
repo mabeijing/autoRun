@@ -7,7 +7,7 @@ import utils
 class PolicyType:
 
     def is_over_limitation(self):
-        raise NotADirectoryError()
+        raise NotImplementedError()
 
     def calculate_premium(self):
         raise NotImplementedError()

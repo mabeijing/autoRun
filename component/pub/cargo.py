@@ -1,9 +1,7 @@
 import json
 import random
-from DBUtils import redis_connect
+from dbUtils import rds
 import config
-
-conn = redis_connect
 
 
 class CargoOrder:
@@ -16,10 +14,10 @@ class CargoOrder:
         :param session_id: 全局唯一session标识符
         """
         self.session = session_id
-        self._cargo = json.loads(conn.hget(self.session, 'cargo'))
+        self._cargo = json.loads(rds.hget(self.session, 'cargo'))
         self._cargoCategory = random.choice(['0', '1'])
         if len(self._cargo.get('orderName')) > 1:
-            self._orderWeight = [round(random.triangular(5, 20, 10), 3) for i in
+            self._orderWeight = [round(random.triangular(5, 20, 10), 3) for _ in
                                  range(config.GLOBAL_MULTI_CARGO_NUMBER)]
         else:
             self._orderWeight = [round(random.triangular(5, 20, 10), 3)]
@@ -34,22 +32,21 @@ class CargoOrder:
     @property
     def extra_cargo_info(self):
         n = self._len()
-        extra_info = {}
-        extra_info['selectOrderPacking'] = ['无' for i in range(n)]
-        extra_info['orderPacking'] = ['130' for i in range(n)]
-        extra_info['cargoVersion'] = ['规格型号' for i in range(n)]
-        extra_info['warehouseName'] = ['仓库名称' for i in range(n)]
-        extra_info['warehouseLocation'] = ['仓库位置' for i in range(n)]
-        extra_info['unitFreight'] = ['' for i in range(n)]
-        extra_info['orderLong'] = ['7' for i in range(n)]
-        extra_info['orderWidth'] = ['2' for i in range(n)]
-        extra_info['orderHigh'] = ['4' for i in range(n)]
+        extra_info = {'selectOrderPacking': ['无' for _ in range(n)],
+                      'orderPacking': ['130' for _ in range(n)],
+                      'cargoVersion': ['规格型号' for _ in range(n)],
+                      'warehouseName': ['仓库名称' for _ in range(n)],
+                      'warehouseLocation': ['仓库位置' for _ in range(n)],
+                      'unitFreight': ['' for _ in range(n)],
+                      'orderLong': ['7' for _ in range(n)],
+                      'orderWidth': ['2' for _ in range(n)],
+                      'orderHigh': ['4' for _ in range(n)]}
         return extra_info
 
     @property
     def cargoCategory(self):
         n = self._len()
-        return [self._cargoCategory for i in range(n)]
+        return [self._cargoCategory for _ in range(n)]
 
     @cargoCategory.setter
     def cargoCategory(self, new_cargoCategory: int):

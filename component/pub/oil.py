@@ -126,4 +126,4 @@ if __name__ == '__main__':
     oil = Oil(session_id='123', consignor_user_id=1344259924674217981)
 
     print(oil(support_oil=True, gas_ratio=22))
-    print(oil._oil_type)
+

@@ -1,5 +1,5 @@
 import utils
-from DBUtils import rds
+from dbUtils import rds
 
 
 class Designate:
